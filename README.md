@@ -6,11 +6,10 @@ To install dependencies:
 bun install
 ```
 
-To run:
+Run any solution using the file name:
 
 ```bash
-bun run index.ts
+bun run <file_name>
 ```
 
 This project was created using `bun init` in bun v1.0.23. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
-# hackattic-slns
