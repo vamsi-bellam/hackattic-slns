@@ -1,5 +1,3 @@
-console.log("Hello via Bun!");
-
 type packed_data = { bytes: string };
 
 const response = await fetch(
