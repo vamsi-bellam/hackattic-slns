@@ -26,9 +26,10 @@ app.post("/setjwt", (req, res) => {
 });
 
 app.post("/", (req, res) => {
+  console.log(req);
   try {
     const decodedData = jwt.verify(req.body, secret) as jwt.JwtPayload;
-    if (decodedData.append) {
+    if (decodedData?.append) {
       solution = solution + decodedData.append;
       console.log("solution: ", solution);
       res.json({});
