@@ -9,31 +9,19 @@ const app = express();
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-type jwtSec = { jwt_secret: string };
-const response = await fetch(
-  `https://hackattic.com/challenges/jotting_jwts/problem?access_token=${process.env.ACCESS_TOKEN}`
-);
-
-const response_payload = await (response.json() as Promise<jwtSec>);
-
-console.log("Response Payload ", response_payload);
-const secret = response_payload.jwt_secret;
-
-const result = await fetch(
-  `https://hackattic.com/challenges/jotting_jwts/solve?access_token=${process.env.ACCESS_TOKEN}`,
-  {
-    method: "POST",
-    body: JSON.stringify({
-      app_url: "https://jotting-jwts-ayyk.onrender.com/",
-    }),
-    headers: { "Content-Type": "application/json" },
-  }
-);
-
-console.log("Response to jotting_jwts submission: ", await result.json());
+let secret = "";
 
 app.get("/", (req, res) => {
   res.send("Hang on!.. I am jotting jwts!!");
+});
+
+app.post("/setjwt", (req, res) => {
+  try {
+    secret = req.body;
+    res.send("JWT SECRET set successfully!");
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.post("/", (req, res) => {
