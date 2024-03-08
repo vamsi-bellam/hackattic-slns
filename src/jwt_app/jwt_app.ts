@@ -7,6 +7,8 @@ const app = express();
 
 //app.use(express.text());
 
+// TODO: understanf why text endcoding is not working
+
 app.use(function (req, res, next) {
   req.rawBody = "";
   req.setEncoding("utf8");
