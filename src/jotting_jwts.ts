@@ -1,4 +1,5 @@
 const APP_URL = "https://jotting-jwts-ayyk.onrender.com";
+
 type jwtSec = { jwt_secret: string };
 const response = await fetch(
   `https://hackattic.com/challenges/jotting_jwts/problem?access_token=${process.env.ACCESS_TOKEN}`
@@ -11,7 +12,7 @@ console.log("Response Payload ", responsePayload);
 const setJwtResponse = await fetch(`${APP_URL}/setjwt`, {
   method: "POST",
   body: responsePayload.jwt_secret,
-  headers: { "Content-Type": "application/json" },
+  headers: { "Content-Type": " text/plain" },
 });
 
 console.log("Set JWT Response: ", setJwtResponse);

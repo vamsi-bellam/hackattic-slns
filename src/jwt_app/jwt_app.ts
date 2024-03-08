@@ -32,7 +32,7 @@ app.post("/", (req, res) => {
       console.log("solution: ", solution);
       res.send("Done! Send More!");
     } else {
-      res.send({ solution });
+      res.json({ solution });
     }
   } catch (error) {
     console.log("IN ERROR: Request Body ", req.body);
