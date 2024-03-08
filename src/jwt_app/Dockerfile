@@ -4,6 +4,10 @@
 ARG BUN_VERSION=1.0.23
 FROM oven/bun:${BUN_VERSION}-slim as base
 
+ARG ACCESS_TOKEN
+
+ENV ACCESS_TOKEN $ACCESS_TOKEN
+
 LABEL fly_launch_runtime="Bun"
 
 # Bun app lives here
