@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
 
 app.post("/setjwt", (req, res) => {
   try {
+    console.log(req.body);
     secret = req.body;
     res.send("JWT SECRET set successfully!");
   } catch (error) {
@@ -30,7 +31,7 @@ app.post("/", (req, res) => {
     if (decodedData.append) {
       solution = solution + decodedData.append;
       console.log("solution: ", solution);
-      res.send("Done! Send More!");
+      res.json({});
     } else {
       res.json({ solution });
     }
