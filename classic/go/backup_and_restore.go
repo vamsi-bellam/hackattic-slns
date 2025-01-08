@@ -8,12 +8,12 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"net/http"
 	"os"
 	"os/exec"
 	"strings"
 
 	"github.com/joho/godotenv"
+	"github.com/vamsi-bellam/hackattic-slns/classic/go/utils"
 )
 
 type Response struct {
@@ -22,55 +22,6 @@ type Response struct {
 
 type Solution struct {
 	AliveSsns []string `json:"alive_ssns"`
-}
-
-func fetchData(problem string) []byte {
-	fmt.Println("Fetching the required data...")
-
-	url := fmt.Sprintf(
-		"https://hackattic.com/challenges/%s/problem?access_token=%s",
-		problem, os.Getenv("ACCESS_TOKEN"))
-	resp, err := http.Get(url)
-
-	if err != nil {
-		fmt.Println("Error in getting problem data!")
-		log.Fatal(err)
-	}
-
-	defer resp.Body.Close()
-
-	data, err := io.ReadAll(resp.Body)
-
-	if err != nil {
-		fmt.Println("Error while reading response!")
-		log.Fatal(err)
-	}
-
-	fmt.Println("Fetched the required data!")
-
-	return data
-}
-
-func sendData(problem string, solution []byte) {
-
-	fmt.Println("Sending solution...!")
-
-	url := fmt.Sprintf(
-		"https://hackattic.com/challenges/%s/solve?access_token=%s",
-		problem, os.Getenv("ACCESS_TOKEN"))
-	resp, err := http.Post(url, "json", bytes.NewBuffer(solution))
-
-	if err != nil {
-		fmt.Println("Error sending solution data!")
-		log.Fatal(err)
-	}
-
-	defer resp.Body.Close()
-	if resp.StatusCode != 200 {
-		log.Fatal("Error")
-	}
-
-	fmt.Println("Solution submitted succesfully!")
 }
 
 func main() {
@@ -84,7 +35,7 @@ func main() {
 
 	var response Response
 
-	if err := json.Unmarshal(fetchData(problem), &response); err != nil {
+	if err := json.Unmarshal(utils.FetchData(problem), &response); err != nil {
 		fmt.Println("Error in parsing response to given format!")
 		log.Fatal(err)
 	}
@@ -193,5 +144,5 @@ func main() {
 		log.Fatal(err)
 	}
 
-	sendData(problem, sol)
+	utils.SubmitSolution(problem, sol)
 }
