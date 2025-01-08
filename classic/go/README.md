@@ -13,7 +13,7 @@ To install dependencies:
 go mod tidy
 ```
 
-Run any solution using the file name:
+To submit a solution, go to specific folder and run using the file name:
 
 ```bash
 go run file_name

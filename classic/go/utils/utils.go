@@ -7,7 +7,17 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/joho/godotenv"
 )
+
+func LoadEnv() {
+	err := godotenv.Load("../.env")
+	if err != nil {
+		fmt.Println("Error loading .env file!")
+		log.Fatal(err)
+	}
+}
 
 func FetchData(problem string) []byte {
 	fmt.Println("Fetching the required data...")

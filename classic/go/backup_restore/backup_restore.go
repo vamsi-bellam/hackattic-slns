@@ -12,7 +12,6 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/joho/godotenv"
 	"github.com/vamsi-bellam/hackattic-slns/classic/go/utils"
 )
 
@@ -25,12 +24,8 @@ type Solution struct {
 }
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Println("Error loading .env file!")
-		log.Fatal(err)
-	}
 
+	utils.LoadEnv()
 	problem := "backup_restore"
 
 	var response Response
